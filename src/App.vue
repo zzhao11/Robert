@@ -1,34 +1,34 @@
 <template>
   <div>
-    <RobotModel :action="action"></RobotModel>
+    <router-view></router-view>
+    <!-- <RobotModel :action="action"></RobotModel>
     <button @click="stateChangeHandler">WalkJump</button>
-    <button @click="actionChangeHandler">Jump</button>
+    <button @click="actionChangeHandler">Jump</button> -->
   </div>
 </template>
 
 <script>
-import RobotModel from './components/Robot'
+// import RobotModel from './components/Robot'
 
 export default {
   components: {
-    RobotModel
+    // RobotModel
   },
   data() {
     return {
       // ['Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing', 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp']
-      action: 'Idle'
-    }
+      action: "Idle",
+    };
   },
   methods: {
     stateChangeHandler() {
-      this.action = 'WalkJump'
+      this.action = "WalkJump";
     },
     actionChangeHandler() {
-      this.action = 'Jump'
+      this.action = "Jump";
     },
-  }
-
-}
+  },
+};
 </script>
 
-<style scoped></style>
+<style lang="less" scoped></style>
