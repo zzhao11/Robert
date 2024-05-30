@@ -52,8 +52,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #cfdef3, #e0eafc);
+  height: @bg-height;
+  background: @bg-light;
 }
 
 .shell {

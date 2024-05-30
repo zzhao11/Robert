@@ -102,7 +102,7 @@ export default {
 #terminal {
   height: 684px;
   background: url(https://p6-addone.byteimg.com/tos-cn-i-hhc0kcolqq/d3af496….png~tplv-hhc0kcolqq-image-v5:3075:q100.image),
-    linear-gradient(180deg, #1b212e, #141821);
+    linear-gradient(180deg, @bg-dark, #141821);
   color: #ffffff;
   background-size: contain;
   text-align: center;
@@ -141,7 +141,7 @@ export default {
   position: relative;
   transition: all 0.6s;
   overflow: hidden;
-  background-color: #194ce5;
+  background-color: @bg-blue;
   cursor: default;
 
   &.active {
@@ -251,7 +251,7 @@ export default {
   .spot {
     width: 10px;
     height: 10px;
-    background: #194ce5;
+    background: @bg-blue;
     border-radius: 50%;
     margin-right: 12px;
   }

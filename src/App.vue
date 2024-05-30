@@ -1,34 +1,45 @@
 <template>
   <div>
     <router-view></router-view>
-    <!-- <RobotModel :action="action"></RobotModel>
-    <button @click="stateChangeHandler">WalkJump</button>
-    <button @click="actionChangeHandler">Jump</button> -->
   </div>
 </template>
 
 <script>
-// import RobotModel from './components/Robot'
-
-export default {
-  components: {
-    // RobotModel
-  },
-  data() {
-    return {
-      // ['Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing', 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp']
-      action: "Idle",
-    };
-  },
-  methods: {
-    stateChangeHandler() {
-      this.action = "WalkJump";
-    },
-    actionChangeHandler() {
-      this.action = "Jump";
-    },
-  },
-};
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+
+  &:link {
+    text-decoration: none;
+  }
+
+  &:visited {
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+
+  &:focus {
+    text-decoration: none;
+  }
+}
+</style>

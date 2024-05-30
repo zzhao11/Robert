@@ -206,8 +206,8 @@ export default {
 
 <style lang="less" scoped>
 #about {
-  height: 100vh;
-  background: #1b212e;
+  height: @bg-height;
+  background: @bg-dark;
   color: #ffffff;
   position: relative;
   overflow-x: hidden;
@@ -260,7 +260,7 @@ export default {
   &.active {
     opacity: 1;
     color: #fff;
-    border-bottom: 4px solid #194ce5;
+    border-bottom: 4px solid @bg-blue;
   }
 }
 
@@ -284,7 +284,7 @@ export default {
   position: absolute;
   top: 80px;
   left: 0;
-  background: #1b212e;
+  background: @bg-dark;
 }
 
 video {
@@ -355,7 +355,7 @@ img {
 .spot {
   width: 10px;
   height: 10px;
-  background: #194ce5;
+  background: @bg-blue;
   border-radius: 50%;
   margin-right: 12px;
 }

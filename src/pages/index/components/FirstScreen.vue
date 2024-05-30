@@ -10,7 +10,7 @@
       <h1 class="title">智能桌面宠物机器人</h1>
       <p class="subtitle">为你的桌面增添快乐</p>
       <div class="button-container">
-        <a class="button" href="">前端博客 →</a>
+        <a class="button" href="/robot">管理机器人 →</a>
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@ export default {
 <style lang="less" scoped>
 #index {
   width: 100%;
-  height: 100vh;
+  height: @bg-height;
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
@@ -141,12 +141,7 @@ export default {
   justify-content: center;
   // background: linear-gradient(to bottom right, #9bb4d0 5%, #d8e5fe 90% );
   // background-color: #c6e6e8;
-  background: #e0eafc;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #cfdef3, #e0eafc);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #cfdef3, #e0eafc);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: @bg-light;
 }
 
 .container {

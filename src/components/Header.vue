@@ -6,7 +6,7 @@
           <a class="logo" href="/">
             <img src="../assets/svg/robot.svg" alt="" />
           </a>
-          <ul class="menu-list">
+          <ul class="menu-list" v-if="showMenu">
             <li
               class="menu-item"
               v-for="item in menusList"
@@ -28,8 +28,8 @@
               </div>
             </div>
           </div>
-          <div class="sign-in">
-            <div class="sign-text">立即登录</div>
+          <div v-show="!isLogin" class="sign-in">
+            <div class="sign-text" @click="btnClickHandler">立即登录</div>
           </div>
         </div>
       </div>
@@ -38,18 +38,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
       isSticky: false,
-      activeSection: "",
+      activeSection: "index",
       menusList: [
         { id: "index", title: "首页" },
         { id: "about", title: "产品功能" },
         { id: "scene", title: "产品价值" },
         { id: "terminal", title: "产品终端" },
-        { id: "manage", title: "管理机器人" },
-      ],
+      ]
     };
   },
   created() {
@@ -65,12 +66,11 @@ export default {
     },
     setActiveSection() {
       // 页面部分的ID列表
-      const sections = this.menusList.map(item => item.id);
+      const sections = this.menusList.map((item) => item.id);
       let currentSection = "";
 
       sections.forEach((section) => {
         const el = document.getElementById(section);
-        console.log(el);
         if (el) {
           const scrollPosition = window.scrollY;
 
@@ -79,8 +79,6 @@ export default {
           if (scrollPosition >= offsetTop) {
             currentSection = section;
           }
-
-          console.log(scrollPosition, offsetTop);
         }
       });
 
@@ -97,6 +95,18 @@ export default {
         });
       }
     },
+    btnClickHandler(){
+      this.$router.push('/login')
+    }
+  },
+  computed: {
+    showMenu() {
+      return this.$route.path.indexOf("/robot") === -1;
+    },
+    ...mapState(['isLogin'])
+  },
+  watch: {
+    $route(to, from) {},
   },
 };
 </script>
@@ -105,8 +115,8 @@ export default {
 .top-menu {
   min-width: 1380px;
   width: 100%;
-  z-index: 10;
-  position: sticky;
+  z-index: 1000;
+  position: fixed;
   top: 0;
 }
 
@@ -118,6 +128,11 @@ export default {
 
   &:hover {
     background: #222;
+  }
+
+  &:hover .menu-item::after {
+    background: #007aff;
+    transition: background 0.5s ease-in-out;
   }
 }
 
@@ -208,7 +223,6 @@ nav {
   font-size: 0.875rem;
   line-height: 1.25rem;
   margin-right: 1rem;
-  border-right: 1px solid #fff;
   margin-left: 8px;
   padding-left: 26px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEBSURBVHgB7ZgBDoIwDEWr8SDzKN6Em8gN0BvgydgN8Aa1IBjSsLVxjLCkL1lK2Gibbb8DAIzSQcQ7tR7DdNScwo+bxoYYYjSSkwZ11IqE6mRfGJ+ZmQ63maGZfvnciTnBXwcBGQnFOsPBsIQkLppB0yauII2WtoqXBqk29aAWMg7S8OTyKsXiS+aZzYlndoQv2Q2+S9MG7qfQKmMZUVTVeE+VqVCeSeIZqIlVZmGEPCoz/oIfHQ6mYrVURA6VhWIBS6hbUwRmUFkoFleZYzYnjtmRw6nM3qklLCEJntB7vojJFzf4UFyLuZbQE2Qc6BRXga58vKK9lPwD9/vZUINROh9VsW1GKcSRxwAAAABJRU5ErkJggg==);
@@ -250,7 +264,7 @@ nav {
   text-align: center;
   border-radius: 4px;
   line-height: 22px;
-  background: #194ce5;
+  background: @bg-blue;
   outline: none;
   position: relative;
   overflow: hidden;
