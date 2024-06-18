@@ -1,23 +1,42 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    data:{}
   },
   mutations: {
     // Mutations 用于变更状态
     SET_LOGIN(state, status) {
       state.isLogin = status
+    },
+    GET_INFO(state,status){
+      state.data = status.data.data
+      console.log('state.data',state.data);
     }
   },
   actions: {
     // Actions 用于提交 mutation
     setLogin({ commit }, status) {
       commit('SET_LOGIN', status)
+    },
+    getInfo({ commit }, status){
+      console.log(status);
+      axios({
+        url:'/api/outstanding-kid/kid/getAllUsers',
+        method:'get'
+      }).then((data)=>{
+        console.log('store中的data',data);
+        commit('GET_INFO',data)
+      }).catch((error)=>{
+        console.dir(error);
+      })
+
     }
   },
   getters: {

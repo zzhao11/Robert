@@ -7,8 +7,7 @@
     <div
       v-show="showText"
       :style="{ marginLeft: (parseFloat(rotate) ? 0 : '10') + 'px' }"
-      class="text"
-    >
+      class="text">
       <!-- 充电中不显示电量百分比 -->
       <template v-if="!proIsCharge">{{ batteryNum }}%</template>
     </div>
@@ -16,14 +15,20 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "ElectricQuantity",
   myInterval: null,
   props: {
+    //更新信号
+    num:{
+      type: Number,
+      default:0,
+    },
     // 电池显示的数值
     quantity: {
       type: Number,
-      default: 0,
+      default:0,
     },
     // 是否显示电量百分比
     showText: {
@@ -39,7 +44,7 @@ export default {
     rotate: {
       type: String,
       default: "0",
-    },
+    }
   },
   data() {
     return {
@@ -59,10 +64,17 @@ export default {
       }
     },
   },
+  watch:{
+    num(newVal,oldVal) {
+      console.log('newValp :',newVal,'oldValp :',oldVal)
+      this.dataUpdating ();
+    }
+  },
   mounted() {
     if (this.proIsCharge) {
       this.handeRecharge();
     }
+    this.dataUpdating ();
   },
   methods: {
     handeRecharge() {
@@ -75,6 +87,19 @@ export default {
         }, 600);
       }
     },
+    dataUpdating( ) {
+      axios({
+          url:'/api/outstanding-kid/kid/getAllUsers',
+          method:'GET',
+        }).then((data) => {
+          // console.log(data.data.data);
+          const dataStr = data.data.data[data.data.data.length-1]
+          this.batteryNum = dataStr.electric
+          // console.log(this.batteryNum);
+        }).catch((error)=>{
+          console.log(error)
+        })
+      },
     drawCharge() {
       this.batteryNum = this.batteryNum + 5;
       if (this.batteryNum > 100) {

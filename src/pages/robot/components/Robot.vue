@@ -13,7 +13,7 @@ export default {
   props: {
     action: {
       // ['Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing', 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp']
-      default: "Idle",
+      default: "ThumbsUp",
     },
   },
 
@@ -34,11 +34,13 @@ export default {
     this.init();
     // 在 mounted 钩子中绑定 this 到 animate 函数
     this.renderer.setAnimationLoop(this.animate.bind(this));
+
   },
   watch: {
     action(newValue) {
       this.fadeToAction(newValue, 0.5);
     },
+    
   },
 
   methods: {
